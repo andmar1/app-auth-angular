@@ -48,7 +48,13 @@ export class AuthService {
       .set('x-token', localStorage.getItem('token') || '');   //jalar token del local storage
 
 
-    return this._http.get( url, { headers });
+    return this._http.get<AuthResponse>( url, { headers })
+        .pipe(
+          map( resp => {
 
+            return resp.ok;
+          }),
+          catchError(err => of(false))
+        )
   }
 }
