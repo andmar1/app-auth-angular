@@ -22,7 +22,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes,{
-    useHash:true   //trabajar con hash 
+    useHash:false   //trabajar con hash 
   })],
   exports: [RouterModule]
 })

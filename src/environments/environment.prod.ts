@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://localhost:4000/api'
+  baseUrl: 'https://mean-auth-tony.herokuapp.com/api/auth/api'
+  
 };
