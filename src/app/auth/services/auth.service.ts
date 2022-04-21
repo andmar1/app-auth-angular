@@ -63,4 +63,8 @@ export class AuthService {
         )
   }
 
+  logout(){
+    localStorage.clear()  //Borrar todo lo del local storage del login
+  }
+
 }
