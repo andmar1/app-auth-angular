@@ -35,7 +35,7 @@ export class RegisterComponent {
             Swal.fire({
             icon:'success',
             text:'registro correcto',
-            title:'Login correcto'
+            title:'Registrp correcto'
             })
           }
           else{

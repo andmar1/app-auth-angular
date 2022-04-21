@@ -31,10 +31,6 @@ export class AuthService {
         tap( resp =>{
           if (resp.ok) {
             localStorage.setItem('token', resp.token!)
-            this._usuario = {
-              name: resp.name!,
-              uid : resp.uid!
-            }
           }
         }),
         map( resp => resp.ok ),
@@ -51,10 +47,6 @@ export class AuthService {
           tap( resp => {   //Validacion
             if (resp.ok ) {
               localStorage.setItem('token', resp.token!)   //guardar token en local storage 
-              this._usuario = {  //Establecer informacion al usuario
-                name: resp.name!,
-                uid:resp.uid!
-              }
             }
           }),
           map( resp => resp.ok ), //muta la respuesta, al ser ok muestra un booleano,si es correcta true sino false
@@ -71,11 +63,12 @@ export class AuthService {
     return this._http.get<AuthResponse>( url, { headers })
         .pipe(
           map( resp => {
-            console.log(resp.token)   //ver jwt reestablecidos 
+            // console.log(resp.token)   //ver jwt reestablecidos 
             localStorage.setItem('token', resp.token!)   //guardar token en local storage 
             this._usuario = {  //Establecer informacion al usuario
               name: resp.name!,
-              uid:resp.uid!
+              uid:resp.uid!,
+              email:resp.email!
             }
 
             return resp.ok;
