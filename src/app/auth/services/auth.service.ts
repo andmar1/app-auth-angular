@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { environment } from '../../../environments/environment.prod';
 
-import { AuthResponse } from '../interfaces/interface';
+import { AuthResponse, Usuario } from '../interfaces/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,11 @@ import { AuthResponse } from '../interfaces/interface';
 export class AuthService {
 
   private baseUrl:string = environment.baseUrl; 
+  private _usuario!:Usuario;
+
+  get usuario(){
+    return {...this._usuario};    
+  }
 
   constructor( private _http:HttpClient ) { }
 
@@ -18,6 +25,9 @@ export class AuthService {
     const url = `${this.baseUrl}/auth`
     const body = { email, password }
 
-    return this._http.post<AuthResponse>(url, body );
+    return this._http.post<AuthResponse>(url, body )
+        .pipe(
+          map( resp => resp.ok ) //muta la respuesta, al ser ok muestra un booleano, si es correcta true sino false
+        )
   }
 }
