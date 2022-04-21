@@ -27,16 +27,15 @@ export class LoginComponent {
     const { email, password } = this.miFormulario.value
 
     this._authService.login( email, password )
-        .subscribe( ok =>{
-          if (ok) {
+        .subscribe( ok =>{  
+          console.log(ok) //booleano
+          if (ok === true) {   //validar que el ok sea verdadero 
             this._router.navigateByUrl('/dashboard') //si tenemos ok correcto podemos acceder a dashboard
           }
           else{
             //TODO: mostrar mensaje de error
           }
         });
-    
-
     // this._router.navigateByUrl('/dashboard')
   }
 

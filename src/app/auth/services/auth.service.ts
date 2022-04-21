@@ -29,7 +29,7 @@ export class AuthService {
         .pipe(
           tap( resp => {   //Validacion
             if (resp.ok ) {
-              this._usuario = {
+              this._usuario = {  //Establecer informacion al usuario
                 name: resp.name!,
                 uid:resp.uid!
               }
@@ -37,7 +37,7 @@ export class AuthService {
 
           }),
           map( resp => resp.ok ), //muta la respuesta, al ser ok muestra un booleano,si es correcta true sino false
-          catchError( err => of(false)) //atrapar error 
+          catchError( err => of(err.error)) //atrapar error,  convertit false a observable
         );
   }
 }
