@@ -29,6 +29,7 @@ export class AuthService {
         .pipe(
           tap( resp => {   //Validacion
             if (resp.ok ) {
+              localStorage.setItem('token', resp.token!)   //guardar token en local storage 
               this._usuario = {  //Establecer informacion al usuario
                 name: resp.name!,
                 uid:resp.uid!

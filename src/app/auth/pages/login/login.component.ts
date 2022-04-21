@@ -31,14 +31,20 @@ export class LoginComponent {
 
     this._authService.login( email, password )
         .subscribe( ok =>{  
-          // console.log(ok) //booleano
+          console.log(ok) //booleano
           if (ok === true) {   //validar que el ok sea verdadero 
             this._router.navigateByUrl('/dashboard') //si tenemos ok correcto podemos acceder a dashboard
-            Swal.fire('Login correcto', ok,'success')
+            Swal.fire({
+              icon:'success',
+              title:'Login correcto'
+            })
           }
           else{
             //TODO: mostrar mensaje de error
-            Swal.fire('Error con datos', ok,'error')
+            Swal.fire({
+              icon:'error',
+              title:'Login incorrecto'
+            })
           }
         });
   }
