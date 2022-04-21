@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map, catchError, tap} from 'rxjs/operators';
@@ -35,10 +35,20 @@ export class AuthService {
                 uid:resp.uid!
               }
             }
-
           }),
           map( resp => resp.ok ), //muta la respuesta, al ser ok muestra un booleano,si es correcta true sino false
           catchError( err => of(err.error)) //atrapar error,  convertit false a observable
         );
+  }
+
+  validarToken(){
+
+    const url = `${this.baseUrl}/auth/renew`;
+    const headers = new HttpHeaders()
+      .set('x-token', localStorage.getItem('token') || '');   //jalar token del local storage
+
+
+    return this._http.get( url, { headers });
+
   }
 }
