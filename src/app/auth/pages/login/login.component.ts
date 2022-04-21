@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+// sweete alert
+import Swal from "sweetalert2";
+
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -28,15 +31,16 @@ export class LoginComponent {
 
     this._authService.login( email, password )
         .subscribe( ok =>{  
-          console.log(ok) //booleano
+          // console.log(ok) //booleano
           if (ok === true) {   //validar que el ok sea verdadero 
             this._router.navigateByUrl('/dashboard') //si tenemos ok correcto podemos acceder a dashboard
+            Swal.fire('Login correcto', ok,'success')
           }
           else{
             //TODO: mostrar mensaje de error
+            Swal.fire('Error con datos', ok,'error')
           }
         });
-    // this._router.navigateByUrl('/dashboard')
   }
 
 }
