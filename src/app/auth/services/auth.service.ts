@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { map, catchError, tap} from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment.prod';
@@ -41,7 +41,7 @@ export class AuthService {
         );
   }
 
-  validarToken(){
+  validarToken():Observable<boolean>{   //funcion bool para que lo acepte el guard
 
     const url = `${this.baseUrl}/auth/renew`;
     const headers = new HttpHeaders()
