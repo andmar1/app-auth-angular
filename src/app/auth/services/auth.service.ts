@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { map, catchError} from 'rxjs/operators';
+import { map, catchError, tap} from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment.prod';
 
@@ -27,8 +27,17 @@ export class AuthService {
 
     return this._http.post<AuthResponse>(url, body )
         .pipe(
+          tap( resp => {   //Validacion
+            if (resp.ok ) {
+              this._usuario = {
+                name: resp.name!,
+                uid:resp.uid!
+              }
+            }
+
+          }),
           map( resp => resp.ok ), //muta la respuesta, al ser ok muestra un booleano,si es correcta true sino false
           catchError( err => of(false)) //atrapar error 
-        )
+        );
   }
 }
