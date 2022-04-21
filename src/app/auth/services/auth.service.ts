@@ -47,14 +47,20 @@ export class AuthService {
     const headers = new HttpHeaders()
       .set('x-token', localStorage.getItem('token') || '');   //jalar token del local storage
 
-
     return this._http.get<AuthResponse>( url, { headers })
         .pipe(
           map( resp => {
+            console.log(resp.token)   //ver jwt reestablecidos 
+            localStorage.setItem('token', resp.token!)   //guardar token en local storage 
+            this._usuario = {  //Establecer informacion al usuario
+              name: resp.name!,
+              uid:resp.uid!
+            }
 
             return resp.ok;
           }),
           catchError(err => of(false))
         )
   }
+
 }
