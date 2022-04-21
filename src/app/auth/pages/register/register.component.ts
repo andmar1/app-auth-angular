@@ -23,6 +23,7 @@ export class RegisterComponent {
     console.log( this.miFormulario.value )
 
     this._router.navigateByUrl('/dashboard')
+    
   }
 
 }
