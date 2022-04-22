@@ -1,3 +1,8 @@
 mensaje de error
 
 npm install sweetalert2
+
+
+ver logs de la aplicacion de heroku en terminal, para ver mensajes de la consola "DB Online"
+
+heroku logs -n 10000 --tail -a=mean-auth-tony
